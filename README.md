@@ -11,4 +11,4 @@ The selectable password criteria will include:
 
 Here is a snapshot of what the main password generating function looks like:
 
-![Password Generating Function](module2/code-snapshot.png)
+![Password Generating Function](./code-snapshot.png)
