@@ -18,6 +18,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   // Prompt for length
   length = prompt("Please input desired password length between 8 and 128 characters:");
+  
   // Check for length validity, if does not meet criteria will have to repush button
   if (!length) {
       alert("Please enter a length");
@@ -37,52 +38,52 @@ function writePassword() {
   var passSet;
   // When all four options are selected
   if (upper && lower && num && spec) {
-    passSet = upper.concat(lower, num, spec);
+    passSet = upperSet.concat(lowerSet, numSet, specSet);
   }
   // When three options are selected
   else if (upper && lower && num) {
-    passSet = upper.concat(lower, num);
+    passSet = upperSet.concat(lowerSet, numSet);
   }
   else if (upper && lower && spec) {
-    passSet = upper.concat(lower, spec);
+    passSet = upperSet.concat(lowerSet, specSet);
   }
   else if (upper && num && spec) {
-    passSet = upper.concat(num, spec);
+    passSet = upperSet.concat(numSet, specSet);
   }
   else if (lower && num && spec) {
-    passSet = lower.concat(num, spec);
+    passSet = lowerSet.concat(numSet, specSet);
   }
   // When two options are selected
   else if (upper && lower) {
-    passSet = upper.concat(lower);
+    passSet = upperSet.concat(lowerSet);
   }
   else if (upper && num) {
-    passSet = upper.concat(num);
+    passSet = upperSet.concat(numSet);
   }
   else if (upper && spec) {
-    passSet = upper.concat(spec);
+    passSet = upperSet.concat(specSet);
   }
   else if (lower && num) {
-    passSet = lower.concat(num);
+    passSet = lowerSet.concat(numSet);
   }
   else if (lower && spec) {
-    passSet = lower.concat(spec);
+    passSet = lowerSet.concat(specSet);
   }
   else if (num && spec) {
-    passSet = num.concat(spec);
+    passSet = numSet.concat(specSet);
   }
   // When one option is selected
   else if (upper) {
-    passSet = upper;
+    passSet = upperSet;
   }
   else if (lower) {
-    passSet = lower;
+    passSet = lowerSet;
   }
   else if (num) {
-    passSet = num;
+    passSet = numSet;
   }
   else if (spec) {
-    passSet = spec;
+    passSet = specSet;
   }
   // When no options are selected
   else if (!upper && !lower && !num && !spec) {
@@ -92,16 +93,20 @@ function writePassword() {
   // Password generation
   var pass = [];
   for (var i=0; i < length; i++) {
-
+    var randChar = passSet[Math.floor(Math.random() * passSet.length)];
+    pass.push(randChar);
   }
+  password = pass.join("");
+  return password;
+}
 
-  
-  var password = generatePassword();
+// dispPassword will display the generated password to the text box
+function dispPassword() {
+  var password = writePassword();
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", dispPassword);
